@@ -16,6 +16,8 @@ import StartButton from '../../components/StartButton';
 import AccessModeSelection, {
   AccessMode
 } from '../../components/AccessModeSelection';
+import { authConfig } from '../../config';
+import TextBlock from './TextBlock';
 
 export type OwnNewBoardProps = RouteComponentProps<{}>;
 
@@ -26,6 +28,7 @@ export interface StateNewBoardProps {
   onProviderLogin: (provider: AuthProvider) => () => void;
   onLogout: () => void;
   onCreateNewBoard: (mode: RetroMode, secure: boolean) => void;
+  isAnonymous: boolean;
 }
 
 export type NewBoardProps = OwnNewBoardProps & StateNewBoardProps;
@@ -62,7 +65,7 @@ export class NewBoard extends Component<NewBoardProps, NewBoardState> {
   };
 
   render() {
-    const { uid } = this.props;
+    const { uid, isAnonymous } = this.props;
 
     const SecureBoardCheckbox = (
       <AccessModeSelection
@@ -74,11 +77,9 @@ export class NewBoard extends Component<NewBoardProps, NewBoardState> {
 
     return (
       <WelcomeArea>
-        {!uid && (
+        {!uid && authConfig.allowAnonymousBoards && (
           <div className="new-board__action-area-content">
-            <div>
-              <h1 className="new-board__action-area-header">Try it now!</h1>
-            </div>
+            <TextBlock header="Try it now!" />
             <div>
               <Input
                 type="text"
@@ -109,21 +110,42 @@ export class NewBoard extends Component<NewBoardProps, NewBoardState> {
             </div>
           </div>
         )}
-        {uid && (
+        {!uid && !authConfig.allowAnonymousBoards && (
           <div className="new-board__action-area-content">
-            <div>
-              <h1 className="new-board__action-area-header">Try it now!</h1>
-              <p className="new-board__action-area-paragraph">
-                Start your first online retrospective in a few seconds. No
-                registration required - completely free.
-              </p>
-            </div>
+            <TextBlock header="Login first">
+              You need to login before you can start your first collaborative
+              session.
+            </TextBlock>
+            <ProviderLogin onProviderLogin={this.props.onProviderLogin} />
+          </div>
+        )}
+        {((uid && authConfig.allowAnonymousBoards) ||
+          (uid && !authConfig.allowAnonymousBoards && !isAnonymous)) && (
+          <div className="new-board__action-area-content">
+            <TextBlock header="Try it now!">
+              Start your first online retrospective in a few seconds. No
+              registration required - completely free.
+            </TextBlock>
             {SecureBoardCheckbox}
             <StartButton
               onStart={(mode: RetroMode) =>
                 this.props.onCreateNewBoard(mode, this.state.secure)
               }
             />
+            <button
+              className="new-board__logout-btn"
+              onClick={this.props.onLogout}
+            >
+              Log out
+            </button>
+          </div>
+        )}
+        {uid && !authConfig.allowAnonymousBoards && isAnonymous && (
+          <div className="new-board__action-area-content">
+            <TextBlock header="Sorry!">
+              As an anonymous user you don't have the permission to create your
+              own session. Please login with another authentication provider.
+            </TextBlock>
             <button
               className="new-board__logout-btn"
               onClick={this.props.onLogout}

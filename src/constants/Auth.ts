@@ -4,6 +4,7 @@ export interface AuthProviderMap {
   google: firebase.auth.AuthProvider;
   twitter: firebase.auth.AuthProvider;
   github: firebase.auth.AuthProvider;
+  saml?: firebase.auth.AuthProvider;
 }
 
 export type AuthProvider = keyof AuthProviderMap;
@@ -13,5 +14,6 @@ export const instantiateAuthProviders = (
 ): AuthProviderMap => ({
   google: new firebase.auth['GoogleAuthProvider'](),
   twitter: new firebase.auth['TwitterAuthProvider'](),
-  github: new firebase.auth['GithubAuthProvider']()
+  github: new firebase.auth['GithubAuthProvider'](),
+  saml: new firebase.auth['SAMLAuthProvider']('saml.jumpcloud')
 });

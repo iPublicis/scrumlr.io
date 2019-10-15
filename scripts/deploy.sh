@@ -4,7 +4,22 @@ set -e
 # Change to root directory
 cd "$( dirname "${BASH_SOURCE[0]}" )"/..
 
-readonly STAGE=${1:-staging}
+STAGE=${!#:-staging}
+if [[ $STAGE == -* ]]; then
+    STAGE="staging"
+fi
+echo "About to deploy to stage '${STAGE}'"
+
+allowAnonymousBoards=true
+while getopts ':r' option
+do
+  case $option in
+    r) allowAnonymousBoards=false;;
+  esac
+done
+
+echo "Anonymous board creation allowed: ${allowAnonymousBoards}"
+export REACT_APP_ALLOW_ANONYMOUS_BOARDS=${allowAnonymousBoards}
 
 case "$STAGE" in
         staging)
@@ -37,3 +52,4 @@ npm run build
 firebase login
 firebase use ${STAGE}
 firebase deploy
+firebase database:set /config/allowAnonymousBoards --data "${allowAnonymousBoards}" -y

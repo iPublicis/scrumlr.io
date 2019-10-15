@@ -13,10 +13,6 @@ import PrintViewBoard from './routes/PrintViewBoard';
 import Icon from './components/Icon/Icon';
 import Board from './routes/Board';
 
-export interface RouterProps {
-  firebase?: any;
-}
-
 const CloseButton = (props: any) => (
   <Icon
     name="close20"
@@ -25,7 +21,7 @@ const CloseButton = (props: any) => (
   />
 );
 
-const Router = (props: RouterProps) => (
+const Router = () => (
   <div style={{ display: 'flex', flexDirection: 'column' }}>
     <div style={{ flex: 1 }}>
       <HashRouter>

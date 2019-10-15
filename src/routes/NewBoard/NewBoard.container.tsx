@@ -66,11 +66,13 @@ export function mapStateToProps(
 
   let uid: string | null = null;
   const auth = onSignIn ? {} : firebase.auth();
+  let isAnonymous: boolean = true;
 
   const boards: Boards = getVal(fbState, 'data/boards', undefined);
 
   if (auth.currentUser) {
     uid = auth.currentUser.uid;
+    isAnonymous = auth.currentUser.isAnonymous;
   }
 
   function onCreateNewBoard(mode: RetroMode, secure: boolean) {
@@ -120,6 +122,7 @@ export function mapStateToProps(
   return {
     boards,
     uid,
+    isAnonymous,
     onCreateNewBoard,
     onLogin,
     onProviderLogin,

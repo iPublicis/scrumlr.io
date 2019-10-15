@@ -14,6 +14,30 @@ export const firebase = {
   enableRedirectHandling: false
 };
 
+const falsy = /^(?:f(?:alse)?|no?|0+)$/i;
+const getBoolean = (val: any) => {
+  return !falsy.test(val) && !!val;
+};
+
+export const authConfig = {
+  enableGoogleIdentity:
+    process.env.REACT_APP_ENABLE_GOOGLE_IDENTITY === undefined ||
+    getBoolean(process.env.REACT_APP_ENABLE_GOOGLE_IDENTITY),
+  enableTwitterIdentity:
+    process.env.REACT_APP_ENABLE_TWITTER_IDENTITY === undefined ||
+    getBoolean(process.env.REACT_APP_ENABLE_TWITTER_IDENTITY),
+  enableGithubIdentity:
+    process.env.REACT_APP_ENABLE_GITHUB_IDENTITY === undefined ||
+    getBoolean(process.env.REACT_APP_ENABLE_GITHUB_IDENTITY),
+  enableSamlIdentity:
+    process.env.REACT_APP_ENABLE_SAML_IDENTITY === undefined
+      ? false
+      : getBoolean(process.env.REACT_APP_ENABLE_SAML_IDENTITY),
+  allowAnonymousBoards:
+    process.env.REACT_APP_ALLOW_ANONYMOUS_BOARDS === undefined ||
+    getBoolean(process.env.REACT_APP_ALLOW_ANONYMOUS_BOARDS)
+};
+
 export const sentry = {
   dsn: process.env.REACT_APP_SENTRY_DSN
 };
