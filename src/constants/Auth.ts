@@ -15,5 +15,5 @@ export const instantiateAuthProviders = (
   google: new firebase.auth['GoogleAuthProvider'](),
   twitter: new firebase.auth['TwitterAuthProvider'](),
   github: new firebase.auth['GithubAuthProvider'](),
-  saml: new firebase.auth['SAMLAuthProvider']('saml.jumpcloud')
+  saml: new firebase.auth['SAMLAuthProvider']('saml.sso')
 });
