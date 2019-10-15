@@ -1,0 +1,39 @@
+@import '../../constants/style';
+
+.legal {
+  margin: $large-margin;
+}
+
+.legal p {
+  text-align: justify;
+}
+
+.legal address > p {
+  margin: 0;
+}
+
+.legal__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.legal__column {
+  flex: 1;
+}
+
+
+@media #{$tablet} {
+  .legal__container {
+    flex-direction: row;
+  }
+
+  .legal__column {
+    padding-right: $default-margin;
+  }
+
+  .legal__column + .legal__column {
+    padding-left: $default-margin;
+    padding-right: 0;
+  }
+
+}

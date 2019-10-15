@@ -12,6 +12,7 @@ import LoginBoard from './routes/LoginBoard';
 import PrintViewBoard from './routes/PrintViewBoard';
 import Icon from './components/Icon/Icon';
 import Board from './routes/Board';
+import Legal from './routes/Legal';
 
 const CloseButton = (props: any) => (
   <Icon
@@ -41,6 +42,7 @@ const Router = () => (
               <BoardGuard {...routeProps} component={PrintViewBoard} />
             )}
           />
+          <Route path="/legal" component={Legal as any} />
         </Switch>
       </HashRouter>
       <ToastContainer

@@ -94,7 +94,7 @@
     "eject": "react-scripts-ts eject",
     "lint": "tslint --config tslint.json --project tsconfig.json --type-check \"src/*.{ts,tsx} \" \"src/**/*.{ts,tsx}\"",
     "lint:fix": "npm run lint -- --fix",
-    "prettier:base": "prettier --parser typescript --trailing-comma none --single-quote \"src/*.{ts,tsx}\" \"src/**/*.{ts,tsx}\"",
+    "prettier:base": "prettier --parser typescript --trailing-comma none --ignore-path --single-quote \"src/*.{ts,tsx}\" \"src/**/*.{ts,tsx}\"",
     "prettier:list": "npm run prettier:base -- --list-different",
     "prettier:write": "npm run prettier:base -- --write",
     "e2e": "cucumber-js features/*.feature"
