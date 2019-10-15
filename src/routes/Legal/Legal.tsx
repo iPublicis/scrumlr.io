@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './Legal.scss';
 
-// prettier-ignore-start
 const Address: React.FunctionComponent<{}> = () => (
     <address>
         <p>J... B...</p>
@@ -139,4 +138,3 @@ export const Legal: React.FunctionComponent<{}> = () => (
 );
 
 export default Legal;
-// prettier-ignore-end
