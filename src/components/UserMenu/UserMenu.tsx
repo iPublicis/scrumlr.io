@@ -217,7 +217,16 @@ export class UserMenu extends React.Component<UserMenuProps, UserMenuState> {
             </li>
           </>
         )}
-        <li key="user-menu__logout" className="user-menu__logout">
+        <li key="user-menu__legal-notice" className="user-menu__divider">
+          <MenuItem
+            name="Legal notice"
+            icon="donate"
+            onClick={() => {
+              window.open('/#/legal', '_blank');
+            }}
+          />
+        </li>
+        <li key="user-menu__logout">
           <MenuItem name="Sign Out" icon="logout" onClick={onSignOut} />
         </li>
       </DropdownMenu>

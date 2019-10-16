@@ -130,7 +130,7 @@ $icon__height: $icon__width;
   }
 }
 
-.user-menu__logout::before {
+.user-menu__divider::before {
   content: ' ';
   display: block;
   height: 1px;

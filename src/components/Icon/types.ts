@@ -17,6 +17,7 @@ export type IconNames =
   | 'circle-selection-grey'
   | 'logout'
   | 'download'
+  | 'donate'
   | 'edit'
   | 'share'
   | 'pencil'

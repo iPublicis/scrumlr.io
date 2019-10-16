@@ -13,6 +13,7 @@ export const iconMap: { [key: string]: string } = {
   'circle-selection-grey': 'icon-44-selection-circle-grey',
   logout: 'icon-20-logout',
   download: 'icon-20-download',
+  donate: 'icon-20-donate',
   edit: 'icon-20-create',
   share: 'icon-20-share',
   pencil: 'icon-20-edit',
