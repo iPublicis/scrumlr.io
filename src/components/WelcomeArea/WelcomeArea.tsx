@@ -22,7 +22,21 @@ export const WelcomeArea: React.SFC<{}> = ({ children }) => (
       </div>
     </div>
 
-    <div className="welcome-area__action-area">{children}</div>
+    <div className="welcome-area__action-area-wrapper">
+      <div className="welcome-area__action-area">{children}</div>
+      <footer className="welcome-area__action-footer">
+        <a
+          className="welcome-area__legal-notice"
+          href="/#/legal"
+          target="_blank"
+        >
+          Legal notice
+        </a>
+        <p className="welcome-area__copyright">
+          © Copyright 2019. All rights reserved.
+        </p>
+      </footer>
+    </div>
   </div>
 );
 
