@@ -37,9 +37,6 @@ const availableRetroModes = {
   },
   fourL: {
     label: '4L (Liked, Learned, Lacked, Longed for)'
-  },
-  meetup: {
-    label: 'scrumlr.io Meetup'
   }
 };
 
@@ -90,6 +87,7 @@ export class StartButton extends React.Component<
       close: this.closeSelectionMenu,
       toggle: dropdownButton,
       align: 'right',
+      upwards: true,
       closeOnInsideClick: true
     };
 

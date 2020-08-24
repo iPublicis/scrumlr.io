@@ -13,18 +13,18 @@ import { connect } from 'react-redux';
 import { RetroMode } from '../../constants/mode';
 
 export interface OwnHeaderProps {
+  isAdmin: boolean;
   boardId: string;
   onSignOut: () => void;
-  onExport: () => void;
+  onPdfExport: () => void;
+  onCsvExport: () => void;
   onOpenModal: (modal: ModalType) => void;
   className?: string;
 }
 
 export interface StateHeaderProps {
-  admin: boolean;
   mode: RetroMode;
   phase: number;
-  isLastPhase: boolean;
   sorted: boolean;
   boardName?: string;
   onPrevPhase: () => void;
@@ -43,12 +43,12 @@ export type HeaderProps = OwnHeaderProps & StateHeaderProps;
 export class Header extends React.Component<HeaderProps, {}> {
   render() {
     const {
-      admin,
+      isAdmin,
       className,
       boardName,
+      boardId,
       mode,
       phase: guidedPhase,
-      isLastPhase,
       onPrevPhase,
       onNextPhase,
       onSetTimer,
@@ -58,7 +58,8 @@ export class Header extends React.Component<HeaderProps, {}> {
       onChangeBoardName,
       onOpenModal,
       loggedIn,
-      onExport,
+      onPdfExport,
+      onCsvExport,
       onDeleteBoard,
       onSignOut
     } = this.props;
@@ -71,7 +72,7 @@ export class Header extends React.Component<HeaderProps, {}> {
           <Logo className="header__control-logo" />
 
           <PhaseMenu
-            admin={admin}
+            admin={isAdmin}
             mode={mode}
             guidedPhase={guidedPhase}
             onPrevPhase={onPrevPhase}
@@ -80,21 +81,24 @@ export class Header extends React.Component<HeaderProps, {}> {
 
           <div className="header__control-users">
             <UserList
+              admin={isAdmin}
+              boardUrl={boardId}
               currentUserId={user}
               users={users}
               onToggleReadyState={onToggleReadyState}
+              onOpenModal={onOpenModal}
             />
 
             {loggedIn && (
               <UserMenu
                 boardName={boardName}
-                admin={admin}
+                admin={isAdmin}
                 onChangeBoardName={onChangeBoardName}
-                onExport={onExport}
+                onPdfExport={onPdfExport}
+                onCsvExport={onCsvExport}
                 onSignOut={onSignOut}
                 onOpenModal={onOpenModal}
                 onDeleteBoard={onDeleteBoard}
-                isLastPhase={isLastPhase}
                 onSetTimer={onSetTimer}
               />
             )}

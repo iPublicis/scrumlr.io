@@ -4,7 +4,6 @@ import { OwnHeaderProps, StateHeaderProps } from './Header';
 import isLoaded = helpers.isLoaded;
 import * as Raven from 'raven-js';
 import { debounce } from 'lodash';
-import { getPhasesCount } from '../../constants/Retrospective';
 
 export const mapStateToProps = (
   state: StoreState,
@@ -34,11 +33,6 @@ export const mapStateToProps = (
       acc[id] = users[id];
       return acc;
     }, {});
-
-  const isBoardAdmin =
-    auth && isLoaded(boardConfig)
-      ? auth.uid === boardConfig.config.creatorUid
-      : false;
 
   function onToggleReadyState() {
     firebase
@@ -170,16 +164,10 @@ export const mapStateToProps = (
     onSwitchPhaseIndex(1);
   };
 
-  const isLastPhase =
-    boardConfig.config.guidedPhase ===
-    getPhasesCount(boardConfig.config.mode) - 1;
-
   return {
-    admin: isBoardAdmin,
     boardName: boardConfig.config.name,
     mode: boardConfig.config.mode,
     phase: boardConfig.config.guidedPhase,
-    isLastPhase,
     sorted: boardConfig.config.sorted,
     onPrevPhase,
     onNextPhase,
